@@ -1,0 +1,17 @@
+{
+  "job_id": "2b63181a-0198-42a3-b88d-c4546c76bbe1",
+  "account_id": "dev",
+  "status": "running",
+  "created_at": 1782901805.7284331,
+  "prompt": "a beautiful mountain top",
+  "negative_prompt": "a little cloudy",
+  "width": 1024,
+  "height": 1024,
+  "num_inference_steps": null,
+  "guidance_scale": null,
+  "mode": "quality",
+  "credit_cost": 5,
+  "credits_charged": true,
+  "credits_refunded": false,
+  "started_at": 1782901805.7374368
+}

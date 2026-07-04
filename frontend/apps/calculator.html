@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator — Symoneural</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="../css/apps.css" />
+    <!-- KaTeX for LaTeX rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+            onload="renderMathInElement(document.body);"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <h1><a href="../index.html" class="home-link">Symoneural</a> › Calculator</h1>
+    </header>
+
+    <nav class="app-top-nav">
+      <a href="../index.html">Home</a>
+      <a href="chatbot.html">Chatbot</a>
+      <a href="code_assist.html">Code</a>
+      <a href="calculator.html">Calculator</a>
+      <a href="text_to_image.html">Image</a>
+      <a href="text_to_video.html">Video</a>
+      <a href="iptv.html">IPTV</a>
+      <a href="tensor_lab.html">Tensor</a>
+      <a href="mining.html">Mining</a>
+      <a href="embedded.html">Embedded</a>
+      <a href="llm_ops.html">LLM Ops</a>
+      <a href="terminal.html">Terminal</a>
+    </nav>
+
+    <div class="app-layout app-layout--single">
+      <main class="app-main">
+        <section class="panel">
+          <h2>Symbolic Calculator</h2>
+
+          <label>Expression
+            <input id="exprInput" type="text" placeholder="x**3 + sin(x)" />
+          </label>
+
+          <div class="row">
+            <label>Mode
+              <select id="modeSelect">
+                <option value="numeric">Numeric evaluate</option>
+                <option value="derivative">Derivative</option>
+                <option value="integral">Integral</option>
+                <option value="limit">Limit</option>
+                <option value="ode">Solve ODE</option>
+              </select>
+            </label>
+            <label>Variable <input id="varInput" value="x" /></label>
+          </div>
+
+          <!-- Derivative options -->
+          <div id="derivOpts" class="mode-opts">
+            <label>Order <input id="orderInput" type="number" value="1" min="1" /></label>
+          </div>
+
+          <!-- Integral options -->
+          <div id="intOpts" class="mode-opts hidden">
+            <label>Lower bound <input id="lowerInput" placeholder="0 (omit for indefinite)" /></label>
+            <label>Upper bound <input id="upperInput" placeholder="∞ (omit for indefinite)" /></label>
+          </div>
+
+          <!-- Limit options -->
+          <div id="limOpts" class="mode-opts hidden">
+            <label>Point <input id="pointInput" value="0" /></label>
+            <label>Direction
+              <select id="dirSelect">
+                <option value="+">+  (right)</option>
+                <option value="-">−  (left)</option>
+                <option value="+-">±  (two-sided)</option>
+              </select>
+            </label>
+          </div>
+
+          <!-- ODE options -->
+          <div id="odeOpts" class="mode-opts hidden">
+            <label>Function name <input id="funcInput" value="y" /></label>
+            <p class="hint">Write ODE as e.g. <code>y(x).diff(x) + y(x) - x</code></p>
+          </div>
+
+          <button id="calcBtn">Calculate</button>
+        </section>
+
+        <section class="panel" id="resultPanel">
+          <h2>Result</h2>
+          <div id="latexOut" class="latex-output"></div>
+          <div id="numericOut" class="numeric-output"></div>
+        </section>
+
+        <section class="panel">
+          <h2>History</h2>
+          <ul id="historyList" class="history-list"></ul>
+        </section>
+      </main>
+    </div>
+
+    <script src="../js/apps/calculator.js"></script>
+  </body>
+</html>

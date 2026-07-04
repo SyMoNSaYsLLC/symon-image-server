@@ -1,0 +1,17 @@
+{
+  "job_id": "5d365dc3-642c-4ee7-b353-574f842c9167",
+  "account_id": "dev",
+  "status": "running",
+  "created_at": 1782901937.4071865,
+  "prompt": "Tonjiro and nejeku from demon slayer riding a dragon",
+  "negative_prompt": null,
+  "width": 1024,
+  "height": 1024,
+  "num_inference_steps": null,
+  "guidance_scale": null,
+  "mode": "fast",
+  "credit_cost": 1,
+  "credits_charged": true,
+  "credits_refunded": false,
+  "started_at": 1782901937.4170523
+}

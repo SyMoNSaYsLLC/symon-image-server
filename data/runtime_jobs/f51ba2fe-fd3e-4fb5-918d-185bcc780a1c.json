@@ -1,0 +1,17 @@
+{
+  "job_id": "f51ba2fe-fd3e-4fb5-918d-185bcc780a1c",
+  "account_id": "dev",
+  "status": "running",
+  "created_at": 1782902480.8086038,
+  "prompt": "A small black raven icon",
+  "negative_prompt": null,
+  "width": 1024,
+  "height": 1024,
+  "num_inference_steps": null,
+  "guidance_scale": null,
+  "mode": "fast",
+  "credit_cost": 1,
+  "credits_charged": true,
+  "credits_refunded": false,
+  "started_at": 1782902480.8186526
+}

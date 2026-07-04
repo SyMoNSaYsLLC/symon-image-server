@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Text to Image — Symoneural</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="../css/apps.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <h1><a href="../index.html" class="home-link">Symoneural</a> › Text to Image</h1>
+      <span id="accountStatus" class="status-bar">Account: not connected</span>
+    </header>
+
+    <nav class="app-top-nav">
+      <a href="../index.html">Home</a>
+      <a href="chatbot.html">Chatbot</a>
+      <a href="code_assist.html">Code</a>
+      <a href="calculator.html">Calculator</a>
+      <a href="text_to_image.html">Image</a>
+      <a href="text_to_video.html">Video</a>
+      <a href="iptv.html">IPTV</a>
+      <a href="tensor_lab.html">Tensor</a>
+      <a href="mining.html">Mining</a>
+      <a href="embedded.html">Embedded</a>
+      <a href="llm_ops.html">LLM Ops</a>
+      <a href="terminal.html">Terminal</a>
+    </nav>
+
+    <div class="app-layout">
+      <aside class="app-sidebar">
+        <h3>Account</h3>
+        <label>User API Key
+          <input id="apiKeyInput" type="password" placeholder="symon_user_..." />
+        </label>
+        <button id="saveKeyBtn">Save Key</button>
+        <button id="refreshMeBtn">Refresh Account</button>
+        <div id="creditBox" class="status-bar">Credits: unknown</div>
+
+        <h3>Buy Credits</h3>
+        <label>Pack
+          <select id="packSelect">
+            <option value="starter">Starter — $5 / 100 credits</option>
+            <option value="creator">Creator — $20 / 500 credits</option>
+            <option value="pro">Pro — $50 / 1500 credits</option>
+          </select>
+        </label>
+        <button id="buyBtn">Buy Credits</button>
+
+        <h3>Generation Settings</h3>
+        <label>Mode
+          <select id="modeSelect">
+            <option value="fast">Fast — 1 credit</option>
+            <option value="quality">Quality — 5 credits</option>
+          </select>
+        </label>
+
+        <label>Prompt
+          <textarea id="promptInput" rows="4" placeholder="A glowing cyber raven mascot logo, sleek futuristic style"></textarea>
+        </label>
+
+        <label>Negative Prompt
+          <textarea id="negPromptInput" rows="2" placeholder="blurry, low quality, watermark"></textarea>
+        </label>
+
+        <div class="row">
+          <label>Width <input id="widthInput" type="number" value="1024" min="512" max="1024" step="64" /></label>
+          <label>Height <input id="heightInput" type="number" value="1024" min="512" max="1024" step="64" /></label>
+        </div>
+
+        <button id="generateBtn">Generate</button>
+        <div id="jobStatus" class="status-bar"></div>
+      </aside>
+
+      <main class="app-main">
+        <div class="toolbar-row">
+          <h2>Your Images</h2>
+          <button id="refreshJobsBtn">Refresh Jobs</button>
+        </div>
+        <div id="gallery" class="image-gallery"></div>
+        <div id="emptyState" class="empty-state">
+          <p>Paste your user key to view credits and image jobs.</p>
+        </div>
+      </main>
+    </div>
+
+    <script src="../js/apps/text_to_image.js"></script>
+  </body>
+</html>

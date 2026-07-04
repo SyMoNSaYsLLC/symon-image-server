@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Code Assistant — Symoneural</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="../css/apps.css" />
+    <!-- Monaco Editor via CDN -->
+    <link rel="stylesheet" data-name="vs/editor/editor.main"
+          href="https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs/editor/editor.main.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <h1><a href="../index.html" class="home-link">Symoneural</a> › Code Assistant</h1>
+    </header>
+
+    <nav class="app-top-nav">
+      <a href="../index.html">Home</a>
+      <a href="chatbot.html">Chatbot</a>
+      <a href="code_assist.html">Code</a>
+      <a href="calculator.html">Calculator</a>
+      <a href="text_to_image.html">Image</a>
+      <a href="text_to_video.html">Video</a>
+      <a href="iptv.html">IPTV</a>
+      <a href="tensor_lab.html">Tensor</a>
+      <a href="mining.html">Mining</a>
+      <a href="embedded.html">Embedded</a>
+      <a href="llm_ops.html">LLM Ops</a>
+      <a href="terminal.html">Terminal</a>
+    </nav>
+
+    <div class="app-layout app-layout--code">
+      <aside class="app-sidebar">
+        <h3>Actions</h3>
+        <button class="action-btn" data-action="explain">Explain</button>
+        <button class="action-btn" data-action="complete">Complete</button>
+        <button class="action-btn" data-action="refactor">Refactor</button>
+        <button class="action-btn" data-action="debug">Debug</button>
+
+        <label>Language
+          <select id="langSelect">
+            <option value="">Auto-detect</option>
+            <option value="python">Python</option>
+            <option value="javascript">JavaScript</option>
+            <option value="typescript">TypeScript</option>
+            <option value="rust">Rust</option>
+            <option value="cpp">C++</option>
+            <option value="java">Java</option>
+            <option value="go">Go</option>
+            <option value="bash">Bash</option>
+          </select>
+        </label>
+
+        <label>Model
+          <input id="modelInput" placeholder="codellama" />
+        </label>
+
+        <div id="statusBar" class="status-bar"></div>
+      </aside>
+
+      <main class="app-main code-main">
+        <div id="editorContainer" style="width:100%; height:340px;"></div>
+
+        <div class="response-panel">
+          <h3>Response</h3>
+          <pre id="codeResponse" class="code-response"></pre>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      var require = { paths: { vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs' } };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.47.0/min/vs/loader.js"></script>
+    <script src="../js/apps/code_assist.js"></script>
+  </body>
+</html>

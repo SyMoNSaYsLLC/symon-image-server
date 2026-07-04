@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Text to Video — Symoneural</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="../css/apps.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <h1><a href="../index.html" class="home-link">Symoneural</a> › Text to Video</h1>
+    </header>
+
+    <nav class="app-top-nav">
+      <a href="../index.html">Home</a>
+      <a href="chatbot.html">Chatbot</a>
+      <a href="code_assist.html">Code</a>
+      <a href="calculator.html">Calculator</a>
+      <a href="text_to_image.html">Image</a>
+      <a href="text_to_video.html">Video</a>
+      <a href="iptv.html">IPTV</a>
+      <a href="tensor_lab.html">Tensor</a>
+      <a href="mining.html">Mining</a>
+      <a href="embedded.html">Embedded</a>
+      <a href="llm_ops.html">LLM Ops</a>
+      <a href="terminal.html">Terminal</a>
+    </nav>
+
+    <div class="app-layout">
+      <aside class="app-sidebar">
+        <h3>Generation Settings</h3>
+
+        <label>Prompt
+          <textarea id="promptInput" rows="5" placeholder="A timelapse of clouds over a mountain range, cinematic"></textarea>
+        </label>
+
+        <div class="row">
+          <label>Frames <input id="framesInput" type="number" value="16" min="8" max="256" /></label>
+          <label>FPS    <input id="fpsInput"    type="number" value="8"  min="1" max="60"  /></label>
+        </div>
+        <div class="row">
+          <label>Width  <input id="widthInput"  type="number" value="512" min="64" step="64" /></label>
+          <label>Height <input id="heightInput" type="number" value="320" min="64" step="64" /></label>
+        </div>
+
+        <button id="generateBtn">Generate Video</button>
+        <div id="jobStatus" class="status-bar"></div>
+      </aside>
+
+      <main class="app-main">
+        <div id="videoPreview" class="video-preview hidden">
+          <video id="videoEl" controls></video>
+          <a id="downloadBtn" class="btn-download" download>Download MP4</a>
+        </div>
+
+        <section class="panel">
+          <h3>Job Queue</h3>
+          <div id="jobList" class="job-list"></div>
+        </section>
+
+        <div id="emptyState" class="empty-state">
+          <p>Configure settings and click <strong>Generate Video</strong>.</p>
+          <p class="hint">Video generation requires a configured text-to-video model (CogVideoX or ModelScope).</p>
+        </div>
+      </main>
+    </div>
+
+    <script src="../js/apps/text_to_video.js"></script>
+  </body>
+</html>

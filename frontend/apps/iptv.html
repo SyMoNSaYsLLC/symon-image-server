@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IPTV — Symoneural</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="../css/apps.css" />
+    <!-- hls.js for HLS stream playback -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <h1><a href="../index.html" class="home-link">Symoneural</a> › IPTV</h1>
+    </header>
+
+    <nav class="app-top-nav">
+      <a href="../index.html">Home</a>
+      <a href="chatbot.html">Chatbot</a>
+      <a href="code_assist.html">Code</a>
+      <a href="calculator.html">Calculator</a>
+      <a href="text_to_image.html">Image</a>
+      <a href="text_to_video.html">Video</a>
+      <a href="iptv.html">IPTV</a>
+      <a href="tensor_lab.html">Tensor</a>
+      <a href="mining.html">Mining</a>
+      <a href="embedded.html">Embedded</a>
+      <a href="llm_ops.html">LLM Ops</a>
+      <a href="terminal.html">Terminal</a>
+    </nav>
+
+    <div class="app-layout">
+      <aside class="app-sidebar">
+        <h3>Load Playlist</h3>
+        <label>M3U URL
+          <input id="m3uUrl" type="url" placeholder="https://example.com/playlist.m3u" />
+        </label>
+        <button id="loadBtn">Load Playlist</button>
+
+        <div class="filter-bar">
+          <input id="searchInput" placeholder="Search channels…" />
+          <select id="groupSelect"><option value="">All categories</option></select>
+        </div>
+
+        <div id="channelList" class="channel-list"></div>
+      </aside>
+
+      <main class="app-main">
+        <div id="playerWrapper" class="player-wrapper hidden">
+          <video id="player" controls></video>
+          <div id="nowPlaying" class="now-playing"></div>
+        </div>
+        <div id="emptyState" class="empty-state">
+          <p>Enter an M3U URL and click <strong>Load Playlist</strong> to begin.</p>
+        </div>
+      </main>
+    </div>
+
+    <script src="../js/apps/iptv.js"></script>
+  </body>
+</html>

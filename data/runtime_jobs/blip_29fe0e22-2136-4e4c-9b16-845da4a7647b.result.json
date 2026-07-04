@@ -1,0 +1,6 @@
+{
+  "ok": true,
+  "caption": "a black raven bird with a golden circle in the background",
+  "model": "Salesforce/blip-image-captioning-base",
+  "runtime": "subprocess_cpu"
+}

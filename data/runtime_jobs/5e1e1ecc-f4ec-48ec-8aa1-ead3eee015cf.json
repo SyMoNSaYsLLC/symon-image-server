@@ -1,0 +1,17 @@
+{
+  "job_id": "5e1e1ecc-f4ec-48ec-8aa1-ead3eee015cf",
+  "account_id": "dev",
+  "status": "running",
+  "created_at": 1782902138.507562,
+  "prompt": "A Symoneural three model AI platform logo, cyber raven, clean futuristic dashboard style",
+  "negative_prompt": null,
+  "width": 1024,
+  "height": 1024,
+  "num_inference_steps": null,
+  "guidance_scale": null,
+  "mode": "fast",
+  "credit_cost": 1,
+  "credits_charged": true,
+  "credits_refunded": false,
+  "started_at": 1782902138.516344
+}

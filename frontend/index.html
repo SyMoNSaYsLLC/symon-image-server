@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Symoneural</title>
+  <link rel="stylesheet" href="/ui/css/styles.css" />
+  <link rel="stylesheet" href="/ui/css/apps.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>Symoneural</h1>
+    <p>Local 3-model AI dashboard: Qwen + SDXL + BLIP</p>
+  </header>
+
+  <main class="app-main standalone">
+    <section class="panel">
+      <h2>Account</h2>
+      <label>User API Key
+        <input id="apiKeyInput" type="password" placeholder="symon_user_..." />
+      </label>
+      <button id="saveKeyBtn">Save Key</button>
+      <button id="refreshBtn">Refresh Status</button>
+      <pre id="accountOutput" class="output-box">Loading...</pre>
+    </section>
+
+    <section class="panel">
+      <h2>AI Apps</h2>
+      <div class="app-grid">
+        <a class="app-card" href="/ui/apps/chatbot.html">
+          <h3>Chatbot</h3>
+          <p>Qwen3-32B-GGUF text/chat/code.</p>
+        </a>
+
+        <a class="app-card" href="/ui/apps/text_to_image.html">
+          <h3>Text to Image</h3>
+          <p>SDXL image generation with credit billing.</p>
+        </a>
+
+        <a class="app-card" href="/ui/apps/image_to_text.html">
+          <h3>Image to Text</h3>
+          <p>BLIP image captioning route.</p>
+        </a>
+
+        <a class="app-card" href="/ui/apps/model_status.html">
+          <h3>Model Status</h3>
+          <p>Runtime state for Qwen, SDXL, and BLIP.</p>
+        </a>
+
+        <a class="app-card" href="/ui/apps/calculator.html">
+          <h3>Calculator</h3>
+          <p>Utility app shell.</p>
+        </a>
+
+        <a class="app-card" href="/ui/apps/iptv.html">
+          <h3>TV</h3>
+          <p>IPTV app shell.</p>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <script src="/ui/js/app.js"></script>
+</body>
+</html>

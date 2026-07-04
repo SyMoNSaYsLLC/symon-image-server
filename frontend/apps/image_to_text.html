@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image to Text — Symoneural</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="../css/apps.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <h1><a href="../index.html" class="home-link">Symoneural</a> › Image to Text</h1>
+      <p id="visionStatus">Vision status: unknown</p>
+    </header>
+
+    <nav class="app-top-nav">
+      <a href="../index.html">Home</a>
+      <a href="chatbot.html">Chatbot</a>
+      <a href="text_to_image.html">Text to Image</a>
+      <a href="image_to_text.html">Image to Text</a>
+      <a href="model_status.html">Model Status</a>
+      <a href="calculator.html">Calculator</a>
+      <a href="iptv.html">TV</a>
+    </nav>
+
+    <div class="app-layout">
+      <aside class="app-sidebar">
+        <h3>Account</h3>
+
+        <label>User API Key
+          <input id="apiKeyInput" type="password" placeholder="symon_user_..." />
+        </label>
+
+        <button id="saveKeyBtn">Save Key</button>
+        <button id="checkStatusBtn">Check Vision Status</button>
+
+        <div class="status-bar">
+          BLIP powers this image-to-text caption route.
+        </div>
+
+        <h3>Upload Image</h3>
+        <input id="imageInput" type="file" accept="image/*" />
+        <button id="captionBtn">Caption Image</button>
+
+        <div id="requestStatus" class="status-bar"></div>
+      </aside>
+
+      <main class="app-main">
+        <section class="panel">
+          <h2>Caption Result</h2>
+          <div id="previewBox" class="vision-preview"></div>
+          <pre id="captionOutput" class="output-box"></pre>
+        </section>
+      </main>
+    </div>
+
+    <script src="../js/apps/image_to_text.js"></script>
+  </body>
+</html>

@@ -1,0 +1,6 @@
+{
+  "ok": true,
+  "caption": "two crows in front of a full moon",
+  "model": "Salesforce/blip-image-captioning-base",
+  "runtime": "subprocess_cpu"
+}

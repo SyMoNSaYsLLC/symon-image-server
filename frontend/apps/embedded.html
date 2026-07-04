@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Embedded — Symoneural</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="../css/apps.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <h1><a href="../index.html" class="home-link">Symoneural</a> › Embedded</h1>
+    </header>
+    <div class="root-layout">
+      <nav class="sidebar-nav">
+        <a class="nav-item" href="../index.html"><span class="nav-icon">🏠</span> Model Manager</a>
+        <a class="nav-item" href="chatbot.html"><span class="nav-icon">💬</span> Chatbot</a>
+        <a class="nav-item" href="code_assist.html"><span class="nav-icon">💻</span> Code Assistant</a>
+        <a class="nav-item" href="calculator.html"><span class="nav-icon">∫</span> Calculator</a>
+        <a class="nav-item" href="text_to_image.html"><span class="nav-icon">🖼</span> Text to Image</a>
+        <a class="nav-item" href="text_to_video.html"><span class="nav-icon">🎬</span> Text to Video</a>
+        <a class="nav-item" href="iptv.html"><span class="nav-icon">📺</span> IPTV</a>
+        <a class="nav-item" href="tensor_lab.html"><span class="nav-icon">🔢</span> Tensor Lab</a>
+        <a class="nav-item" href="mining.html"><span class="nav-icon">⛏️</span> Mining</a>
+        <a class="nav-item nav-item--active" href="embedded.html"><span class="nav-icon">🧩</span> Embedded</a>
+        <a class="nav-item" href="llm_ops.html"><span class="nav-icon">🧠</span> LLM Ops</a>
+        <a class="nav-item" href="terminal.html"><span class="nav-icon">⌨️</span> Terminal</a>
+      </nav>
+      <main class="layout">
+        <section class="panel">
+          <h2>Build Queue</h2>
+          <form id="buildForm">
+            <label>Machine <input name="machine" value="qemuarm64" required /></label>
+            <label>Recipe <input name="recipe" value="core-image-minimal" required /></label>
+            <button type="submit">Queue Build</button>
+          </form>
+          <div id="buildStatus"></div>
+          <pre id="buildLogs" class="build-log"></pre>
+        </section>
+        <section class="panel">
+          <h2>Layers</h2>
+          <form id="layerForm">
+            <label>Layer URL <input name="layer_url" required placeholder="https://..." /></label>
+            <button type="submit">Add Layer</button>
+          </form>
+          <ul id="layerList"></ul>
+        </section>
+        <section class="panel">
+          <h2>Artifacts</h2>
+          <div id="artifactList"></div>
+        </section>
+      </main>
+    </div>
+    <script src="../js/apps/embedded.js"></script>
+  </body>
+</html>

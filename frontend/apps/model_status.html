@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Model Status — Symoneural</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="../css/apps.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <h1><a href="../index.html" class="home-link">Symoneural</a> › Model Status</h1>
+      <p>Qwen + SDXL + BLIP runtime state</p>
+    </header>
+
+    <nav class="app-top-nav">
+      <a href="../index.html">Home</a>
+      <a href="chatbot.html">Chatbot</a>
+      <a href="text_to_image.html">Text to Image</a>
+      <a href="image_to_text.html">Image to Text</a>
+      <a href="model_status.html">Model Status</a>
+      <a href="calculator.html">Calculator</a>
+      <a href="iptv.html">TV</a>
+    </nav>
+
+    <main class="app-main standalone">
+      <section class="panel">
+        <label>User API Key
+          <input id="apiKeyInput" type="password" placeholder="symon_user_..." />
+        </label>
+
+        <button id="saveKeyBtn">Save Key</button>
+        <button id="refreshBtn">Refresh Status</button>
+
+        <pre id="statusOutput" class="output-box"></pre>
+      </section>
+    </main>
+
+    <script src="../js/apps/model_status.js"></script>
+  </body>
+</html>

@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tensor Lab — Symoneural</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="../css/apps.css" />
+    <style>
+      .tl-tabs { display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
+      .tl-tab  { padding: 0.4rem 1rem; border: 1px solid var(--border, #ccc); border-radius: 4px;
+                 background: var(--surface, #f5f5f5); cursor: pointer; font-size: 0.9rem; }
+      .tl-tab.active { background: var(--accent, #4a90d9); color: #fff; border-color: var(--accent, #4a90d9); }
+      .tl-pane { display: none; }
+      .tl-pane.active { display: block; }
+
+      .tl-tensor-preview {
+        background: var(--surface, #f5f5f5);
+        border: 1px solid var(--border, #ccc);
+        border-radius: 4px;
+        padding: 0.75rem;
+        font-family: monospace;
+        font-size: 0.82rem;
+        white-space: pre-wrap;
+        word-break: break-all;
+        max-height: 200px;
+        overflow: auto;
+      }
+      .tl-result {
+        background: var(--surface, #f5f5f5);
+        border: 1px solid var(--border, #ccc);
+        border-radius: 4px;
+        padding: 0.75rem;
+        font-family: monospace;
+        font-size: 0.82rem;
+        white-space: pre-wrap;
+        word-break: break-all;
+        max-height: 300px;
+        overflow: auto;
+        margin-top: 0.5rem;
+      }
+      .tl-chat-history {
+        border: 1px solid var(--border, #ccc);
+        border-radius: 4px;
+        padding: 0.75rem;
+        min-height: 200px;
+        max-height: 400px;
+        overflow-y: auto;
+        margin-bottom: 0.75rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .tl-msg { padding: 0.5rem 0.75rem; border-radius: 6px; max-width: 90%; }
+      .tl-msg.user      { background: var(--accent, #4a90d9); color: #fff; align-self: flex-end; }
+      .tl-msg.assistant { background: var(--surface, #f0f0f0); align-self: flex-start; }
+      .tl-param-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem 1rem; }
+      .tl-param-grid label { display: flex; flex-direction: column; font-size: 0.85rem; gap: 0.2rem; }
+      .hint { font-size: 0.8rem; color: #666; margin: 0.25rem 0; }
+      .tl-badge {
+        display: inline-block; font-size: 0.75rem; padding: 0.1rem 0.45rem;
+        border-radius: 999px; background: var(--accent, #4a90d9); color: #fff;
+        vertical-align: middle; margin-left: 0.3rem;
+      }
+      .key-row { display: flex; gap: 0.5rem; align-items: flex-end; }
+      .key-row input { flex: 1; }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <h1><a href="../index.html" class="home-link">Symoneural</a> › Tensor Lab</h1>
+    </header>
+
+    <nav class="app-top-nav">
+      <a href="../index.html">Home</a>
+      <a href="chatbot.html">Chatbot</a>
+      <a href="code_assist.html">Code</a>
+      <a href="calculator.html">Calculator</a>
+      <a href="text_to_image.html">Image</a>
+      <a href="text_to_video.html">Video</a>
+      <a href="iptv.html">IPTV</a>
+      <a href="tensor_lab.html">Tensor</a>
+      <a href="mining.html">Mining</a>
+      <a href="embedded.html">Embedded</a>
+      <a href="llm_ops.html">LLM Ops</a>
+      <a href="terminal.html">Terminal</a>
+    </nav>
+
+    <div class="app-layout app-layout--single">
+      <main class="app-main">
+
+        <!-- Tab navigation -->
+        <div class="tl-tabs">
+          <button class="tl-tab active" data-pane="create">🔢 Create Tensor</button>
+          <button class="tl-tab" data-pane="ops">➕ Tensor Ops</button>
+          <button class="tl-tab" data-pane="model">⚙️ Model Inspector</button>
+          <button class="tl-tab" data-pane="chat">💬 Custom Chat</button>
+          <button class="tl-tab" data-pane="guide">📖 Tensor Guide</button>
+        </div>
+
+        <!-- ---- Create Tensor ----------------------------------------- -->
+        <div class="tl-pane active" id="pane-create">
+          <section class="panel">
+            <h2>Create Tensor</h2>
+            <p class="hint">
+              A <strong>tensor</strong> is an N-dimensional array — the core data structure
+              in every machine learning model.  Create one here to visualise shape, dtype,
+              and memory footprint.
+            </p>
+
+            <label>Shape (comma-separated dimensions)
+              <input id="tl-shape" value="3,4" placeholder="e.g. 3,4 or 2,3,4" />
+            </label>
+
+            <div class="tl-param-grid" style="margin-top:0.5rem;">
+              <label>Data type
+                <select id="tl-dtype">
+                  <option value="float32">float32 (FP32 — full precision)</option>
+                  <option value="float16">float16 (FP16 — half precision)</option>
+                  <option value="int8">int8 (Q8 — 8-bit integer)</option>
+                  <option value="uint8">uint8 (unsigned 8-bit)</option>
+                  <option value="int32">int32 (32-bit integer)</option>
+                </select>
+              </label>
+
+              <label>Fill method
+                <select id="tl-fill">
+                  <option value="zeros">zeros</option>
+                  <option value="ones">ones</option>
+                  <option value="range">range (0, 1, 2, …)</option>
+                  <option value="random">random</option>
+                </select>
+              </label>
+            </div>
+
+            <button id="tl-createBtn" style="margin-top:0.75rem;">Create Tensor</button>
+          </section>
+
+          <section class="panel" id="tl-createResult" style="display:none;">
+            <h2>Result <span id="tl-createBadge" class="tl-badge"></span></h2>
+            <div id="tl-createMeta" style="margin-bottom:0.5rem; font-size:0.88rem;"></div>
+            <div id="tl-createPreview" class="tl-tensor-preview"></div>
+          </section>
+        </div>
+
+        <!-- ---- Tensor Ops -------------------------------------------- -->
+        <div class="tl-pane" id="pane-ops">
+          <section class="panel">
+            <h2>Tensor Operations</h2>
+            <p class="hint">
+              Apply element-wise or matrix operations to two tensors.
+              For <strong>matmul</strong>, shapes must be compatible: (M×K) × (K×N).
+            </p>
+
+            <label>Tensor A — nested list (e.g. <code>[[1,2],[3,4]]</code>)
+              <textarea id="tl-opA" rows="3" placeholder="[[1,2],[3,4]]">[[1,2],[3,4]]</textarea>
+            </label>
+            <label>Tensor B — nested list
+              <textarea id="tl-opB" rows="3" placeholder="[[5,6],[7,8]]">[[5,6],[7,8]]</textarea>
+            </label>
+
+            <label>Operation
+              <select id="tl-op">
+                <option value="add">add (element-wise +)</option>
+                <option value="sub">sub (element-wise −)</option>
+                <option value="mul">mul (element-wise ×)</option>
+                <option value="matmul">matmul (matrix multiply A @ B)</option>
+              </select>
+            </label>
+
+            <button id="tl-opBtn" style="margin-top:0.75rem;">Apply Operation</button>
+          </section>
+
+          <section class="panel" id="tl-opResult" style="display:none;">
+            <h2>Result</h2>
+            <div id="tl-opMeta" style="margin-bottom:0.5rem; font-size:0.88rem;"></div>
+            <div id="tl-opPreview" class="tl-result"></div>
+          </section>
+        </div>
+
+        <!-- ---- Model Inspector --------------------------------------- -->
+        <div class="tl-pane" id="pane-model">
+          <section class="panel">
+            <h2>Model Inspector</h2>
+            <p class="hint">
+              Inspect the parameters, chat template, and architecture details of any
+              model loaded in the connected Ollama instance.
+            </p>
+
+            <div class="key-row">
+              <label style="flex:1;">Model name
+                <select id="tl-inspectModel"><option value="">Loading…</option></select>
+              </label>
+              <button id="tl-inspectBtn">Inspect</button>
+            </div>
+          </section>
+
+          <section class="panel" id="tl-inspectResult" style="display:none;">
+            <h2>Model Details</h2>
+            <div id="tl-inspectContent" class="tl-result"></div>
+          </section>
+        </div>
+
+        <!-- ---- Custom Chat ------------------------------------------- -->
+        <div class="tl-pane" id="pane-chat">
+          <section class="panel">
+            <h2>Custom Chat — Model Customisation</h2>
+            <p class="hint">
+              Connect to any Ollama-compatible endpoint using an API key.
+              All sampling parameters are exposed so you can experiment with
+              model behaviour directly.
+            </p>
+
+            <!-- Connection settings -->
+            <details open>
+              <summary style="cursor:pointer; font-weight:600; margin-bottom:0.5rem;">
+                🔌 Connection Settings
+              </summary>
+              <label>Base URL
+                <input id="tl-baseUrl" value="http://localhost:11434"
+                       placeholder="http://localhost:11434" />
+              </label>
+              <label style="margin-top:0.4rem;">API Key
+                <div class="key-row">
+                  <input id="tl-apiKey" type="password" placeholder="Leave empty for local Ollama" />
+                  <button id="tl-saveKeyBtn" style="white-space:nowrap;">💾 Save URL</button>
+                </div>
+              </label>
+              <p class="hint">The API key is kept in memory only (not saved to storage for security).
+                The base URL is saved to <code>localStorage</code>.</p>
+            </details>
+
+            <!-- Model and parameters -->
+            <details open style="margin-top:0.75rem;">
+              <summary style="cursor:pointer; font-weight:600; margin-bottom:0.5rem;">
+                ⚙️ Model &amp; Parameters
+              </summary>
+              <label>Model
+                <select id="tl-chatModel"><option value="">Loading…</option></select>
+              </label>
+
+              <div class="tl-param-grid" style="margin-top:0.5rem;">
+                <label>Temperature
+                  <input id="tl-temperature" type="number" value="0.8" min="0" max="2" step="0.05" />
+                </label>
+                <label>Top-P
+                  <input id="tl-topP" type="number" value="0.9" min="0" max="1" step="0.05" />
+                </label>
+                <label>Top-K
+                  <input id="tl-topK" type="number" value="40" min="0" max="200" step="1" />
+                </label>
+                <label>Repeat Penalty
+                  <input id="tl-repeatPenalty" type="number" value="1.1" min="0.5" max="2" step="0.05" />
+                </label>
+                <label>Max tokens (num_predict)
+                  <input id="tl-numPredict" type="number" value="512" min="1" max="8192" step="1" />
+                </label>
+                <label>Context length (num_ctx)
+                  <input id="tl-numCtx" type="number" value="2048" min="128" max="131072" step="128" />
+                </label>
+              </div>
+
+              <label style="margin-top:0.5rem;">System prompt
+                <textarea id="tl-sysPrompt" rows="3"
+                          placeholder="You are a helpful AI assistant that understands tensors and machine learning."></textarea>
+              </label>
+            </details>
+          </section>
+
+          <!-- Chat window -->
+          <section class="panel">
+            <div id="tl-chatHistory" class="tl-chat-history">
+              <div class="hint" style="align-self:center; color:#999;">Messages will appear here…</div>
+            </div>
+            <form id="tl-chatForm" class="chat-input-row">
+              <textarea id="tl-chatInput" rows="2" placeholder="Type a message…"></textarea>
+              <button type="submit" id="tl-sendBtn">Send</button>
+            </form>
+            <button id="tl-clearChatBtn" style="margin-top:0.4rem; font-size:0.8rem;">🗑 Clear chat</button>
+          </section>
+        </div>
+
+        <!-- ---- Guide -------------------------------------------------- -->
+        <div class="tl-pane" id="pane-guide">
+          <section class="panel">
+            <h2>📖 What Is a Tensor?</h2>
+            <p>
+              A <strong>tensor</strong> is a generalisation of scalars, vectors, and matrices
+              to <em>any number of dimensions</em>.  Every weight, activation, and gradient
+              in a neural network lives inside a tensor.
+            </p>
+
+            <table style="width:100%; border-collapse:collapse; font-size:0.88rem; margin:0.75rem 0;">
+              <thead>
+                <tr style="background:var(--surface,#f5f5f5);">
+                  <th style="text-align:left; padding:0.4rem 0.5rem; border-bottom:1px solid #ccc;">Rank</th>
+                  <th style="text-align:left; padding:0.4rem 0.5rem; border-bottom:1px solid #ccc;">Name</th>
+                  <th style="text-align:left; padding:0.4rem 0.5rem; border-bottom:1px solid #ccc;">Shape example</th>
+                  <th style="text-align:left; padding:0.4rem 0.5rem; border-bottom:1px solid #ccc;">ML use</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td style="padding:0.3rem 0.5rem;">0</td><td>Scalar</td><td>[]</td><td>Learning rate</td></tr>
+                <tr><td style="padding:0.3rem 0.5rem;">1</td><td>Vector</td><td>[512]</td><td>Token embedding</td></tr>
+                <tr><td style="padding:0.3rem 0.5rem;">2</td><td>Matrix</td><td>[4096, 4096]</td><td>Attention Q/K/V weight</td></tr>
+                <tr><td style="padding:0.3rem 0.5rem;">3</td><td>3-D Tensor</td><td>[batch, seq, dim]</td><td>Batch of token sequences</td></tr>
+                <tr><td style="padding:0.3rem 0.5rem;">4</td><td>4-D Tensor</td><td>[N, C, H, W]</td><td>Image batch for vision models</td></tr>
+              </tbody>
+            </table>
+
+            <h3>Key Operations</h3>
+            <ul>
+              <li><strong>Matmul (A @ B)</strong> — core of attention and feed-forward layers</li>
+              <li><strong>Element-wise add/mul</strong> — residual connections, gating</li>
+              <li><strong>Softmax</strong> — converts logits to attention weights or output probabilities</li>
+              <li><strong>Reshape / Transpose</strong> — rearrange axes without copying data</li>
+              <li><strong>Quantisation</strong> — pack weights into fewer bits (FP32 → Q4_K_M saves ~8×)</li>
+            </ul>
+
+            <h3>Data Types (dtypes) in GGUF Models</h3>
+            <table id="tl-dtypeTable" style="width:100%; border-collapse:collapse; font-size:0.85rem;">
+              <thead>
+                <tr style="background:var(--surface,#f5f5f5);">
+                  <th style="text-align:left;padding:0.3rem 0.5rem;border-bottom:1px solid #ccc;">Dtype</th>
+                  <th style="text-align:left;padding:0.3rem 0.5rem;border-bottom:1px solid #ccc;">Bits</th>
+                  <th style="text-align:left;padding:0.3rem 0.5rem;border-bottom:1px solid #ccc;">Description</th>
+                </tr>
+              </thead>
+              <tbody id="tl-dtypeBody">
+                <tr><td colspan="3" style="padding:0.3rem 0.5rem; color:#999;">Loading…</td></tr>
+              </tbody>
+            </table>
+
+            <h3>LoRA: Efficient Fine-Tuning</h3>
+            <p>
+              LoRA adds a low-rank decomposition to model weights instead of updating them all:
+            </p>
+            <pre style="background:var(--surface,#f5f5f5);padding:0.6rem;border-radius:4px;font-size:0.85rem;">W_adapted = W_base + alpha × (B @ A)
+# A: [rank × d_in],  B: [d_out × rank],  rank ≪ d_in, d_out</pre>
+            <p>
+              Merge LoRA adapters using <code>helpers/python/lora_merge.py</code>:
+            </p>
+            <pre style="background:var(--surface,#f5f5f5);padding:0.6rem;border-radius:4px;font-size:0.85rem;">python helpers/python/lora_merge.py base.safetensors adapter.safetensors merged.safetensors</pre>
+
+            <p class="hint">
+              See also:
+              <a href="https://medium.com/@stephenc211/what-is-a-tensor-f28d10162832" target="_blank" rel="noopener">
+                What is a Tensor? (Medium)
+              </a>
+              · <a href="../../../docs/tensor-guide.md" target="_blank">docs/tensor-guide.md</a>
+            </p>
+          </section>
+        </div>
+
+      </main>
+    </div>
+
+    <script src="../js/apps/tensor_lab.js"></script>
+  </body>
+</html>

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mining — Symoneural</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="../css/apps.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <h1><a href="../index.html" class="home-link">Symoneural</a> › Mining</h1>
+    </header>
+    <div class="root-layout">
+      <nav class="sidebar-nav">
+        <a class="nav-item" href="../index.html"><span class="nav-icon">🏠</span> Model Manager</a>
+        <a class="nav-item" href="chatbot.html"><span class="nav-icon">💬</span> Chatbot</a>
+        <a class="nav-item" href="code_assist.html"><span class="nav-icon">💻</span> Code Assistant</a>
+        <a class="nav-item" href="calculator.html"><span class="nav-icon">∫</span> Calculator</a>
+        <a class="nav-item" href="text_to_image.html"><span class="nav-icon">🖼</span> Text to Image</a>
+        <a class="nav-item" href="text_to_video.html"><span class="nav-icon">🎬</span> Text to Video</a>
+        <a class="nav-item" href="iptv.html"><span class="nav-icon">📺</span> IPTV</a>
+        <a class="nav-item" href="tensor_lab.html"><span class="nav-icon">🔢</span> Tensor Lab</a>
+        <a class="nav-item nav-item--active" href="mining.html"><span class="nav-icon">⛏️</span> Mining</a>
+        <a class="nav-item" href="embedded.html"><span class="nav-icon">🧩</span> Embedded</a>
+        <a class="nav-item" href="llm_ops.html"><span class="nav-icon">🧠</span> LLM Ops</a>
+        <a class="nav-item" href="terminal.html"><span class="nav-icon">⌨️</span> Terminal</a>
+      </nav>
+      <main class="layout">
+        <section class="panel">
+          <h2>Pools</h2>
+          <button id="refreshPoolsBtn">Refresh Pools</button>
+          <div id="poolList" class="mining-cards"></div>
+        </section>
+        <section class="panel">
+          <h2>Miner Control</h2>
+          <form id="minerForm">
+            <label>Device ID <input name="device_id" required placeholder="asic-01" /></label>
+            <label>Pool URL <input name="pool" required placeholder="stratum+tcp://..." /></label>
+            <div class="row">
+              <button type="submit">Start</button>
+              <button id="stopBtn" type="button">Stop</button>
+            </div>
+          </form>
+          <div id="minerStatus"></div>
+        </section>
+        <section class="panel">
+          <h2>Transactions</h2>
+          <div id="txFeed"></div>
+        </section>
+      </main>
+    </div>
+    <script src="../js/apps/mining.js"></script>
+  </body>
+</html>

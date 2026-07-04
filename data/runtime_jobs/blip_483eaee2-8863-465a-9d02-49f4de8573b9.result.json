@@ -1,0 +1,6 @@
+{
+  "ok": true,
+  "caption": "a black raven sitting on a circular metal plate",
+  "model": "Salesforce/blip-image-captioning-base",
+  "runtime": "subprocess_cpu"
+}

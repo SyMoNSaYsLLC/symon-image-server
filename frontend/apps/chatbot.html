@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chatbot — Symoneural</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="../css/apps.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <h1><a href="../index.html" class="home-link">Symoneural</a> › Chatbot</h1>
+      <p id="chatStatus">Qwen status: unknown</p>
+    </header>
+
+    <nav class="app-top-nav">
+      <a href="../index.html">Home</a>
+      <a href="chatbot.html">Chatbot</a>
+      <a href="text_to_image.html">Image</a>
+      <a href="calculator.html">Calculator</a>
+      <a href="iptv.html">TV</a>
+      <a href="code_assist.html">Code</a>
+    </nav>
+
+    <div class="app-layout">
+      <aside class="app-sidebar">
+        <h3>Account</h3>
+
+        <label>User API Key
+          <input id="apiKeyInput" type="password" placeholder="symon_user_..." />
+        </label>
+
+        <button id="saveKeyBtn">Save Key</button>
+        <button id="checkStatusBtn">Check Qwen Status</button>
+
+        <div class="status-bar">
+          Qwen3-32B-GGUF powers this chatbot.
+        </div>
+
+        <h3>Settings</h3>
+
+        <label>Max Tokens
+          <input id="maxTokensInput" type="number" value="512" min="16" max="2048" step="16" />
+        </label>
+
+        <label>Temperature
+          <input id="temperatureInput" type="number" value="0.2" min="0" max="2" step="0.1" />
+        </label>
+      </aside>
+
+      <main class="app-main">
+        <section class="panel">
+          <h2>Chat</h2>
+
+          <div id="chatLog" class="chat-log"></div>
+
+          <div class="chat-input-row">
+            <textarea id="messageInput" rows="4" placeholder="Ask Qwen something..."></textarea>
+            <button id="sendBtn">Send</button>
+          </div>
+
+          <div id="requestStatus" class="status-bar"></div>
+        </section>
+      </main>
+    </div>
+
+    <script src="../js/apps/chatbot.js"></script>
+  </body>
+</html>
